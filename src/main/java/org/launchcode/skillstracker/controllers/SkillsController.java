@@ -1,8 +1,7 @@
 package org.launchcode.skillstracker.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class SkillsController {
@@ -23,37 +22,50 @@ public class SkillsController {
     }
 
     //localhost:8080/form
-    @GetMapping("form")
+    @GetMapping(value = "/form")
     @ResponseBody
     public String form(){
         return "<html>" +
                 "<body>" +
                 "<p>Name: </p>" +
-                "<form action = 'programming'>" +
+                "<form method = 'post' action = 'form'>" +
                 "<input type = 'text' name ='name'>" +
                 "<p>1st fav lang </p>" +
-                "<select name = '1stfav'>" +
-                "<option value = 'js'>Javascript</option>" +
-                "<option value = 'j'>Java</option>" +
-                "<option value = 'c'>C</option>" +
+                "<select name = 'firstFav'>" +
+                "<option value = 'Javascript'>Javascript</option>" +
+                "<option value = 'Java'>Java</option>" +
+                "<option value = 'C'>C</option>" +
                 "</select>" +
                 "<p>2nd fav lang </p>" +
-                "<select name = '2ndfav'>" +
-                "<option value = 'js'>Javascript</option>" +
-                "<option value = 'j'>Java</option>" +
+                "<select name = 'secondFav'>" +
+                "<option value = 'Javascript'>Javascript</option>" +
+                "<option value = 'Java'>Java</option>" +
                 "<option value = 'c'>C</option>" +
                 "</select>" +
                 "<p>3rd fav lang </p>" +
-                "<select name = '3rdfav'>" +
-                "<option value = 'js'>Javascript</option>" +
-                "<option value = 'j'>Java</option>" +
-                "<option value = 'c'>C</option>" +
+                "<select name = 'thirdFav'>" +
+                "<option value = 'Javascript'>Javascript</option>" +
+                "<option value = 'Java'>Java</option>" +
+                "<option value = 'C'>C</option>" +
                 "</select>" +
                 "<input type = 'submit'>" +
                 "</form>" +
                 "</body>" +
                 "</html>";
 
+    }
+
+    @PostMapping(value = "/form")
+    @ResponseBody
+    public String processForm(@RequestParam String name, @RequestParam String firstFav, @RequestParam String secondFav, @RequestParam String thirdFav){
+        String html = "<h1>" + name + "</h1>" +
+                "<ol>" +
+                "<li>" +firstFav + "</li>" +
+                "<li>" +secondFav + "</li>" +
+                "<li>" +thirdFav + "</li>" +
+                "</ol>";
+
+        return html;
     }
 
 
